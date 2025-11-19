@@ -1,0 +1,920 @@
+.contenedor-principal {
+  margin-top: 80px;
+  min-height: calc(100vh - 80px);
+  background: linear-gradient(135deg, #0F1B2D 0%, #0A0A0A 100%);
+}
+
+/* Hero Section */
+.hero {
+  background: linear-gradient(135deg, 
+    rgba(15, 27, 45, 0.9) 0%, 
+    rgba(10, 10, 10, 0.95) 100%),
+    url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="%2300D4FF" opacity="0.1"><polygon points="1000,100 1000,0 0,100"/></svg>');
+  color: #F5F5F5;
+  padding: 5rem 2rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 80%, rgba(185, 9, 11, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(0, 212, 255, 0.1) 0%, transparent 50%);
+  animation: projectorLight 8s ease-in-out infinite;
+}
+
+@keyframes projectorLight {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 0.8; }
+}
+
+.contenido-hero {
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.contenido-hero h1 {
+  font-size: 3.5rem;
+  margin-bottom: 1.5rem;
+  font-weight: 300;
+  line-height: 1.2;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.contenido-hero strong {
+  font-weight: 700;
+  background: linear-gradient(135deg, #B9090B 0%, #00D4FF 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.descripcion-hero {
+  font-size: 1.3rem;
+  margin-bottom: 3rem;
+  opacity: 0.9;
+  line-height: 1.6;
+  color: rgba(245, 245, 245, 0.8);
+}
+
+.btn-contacto {
+  background: linear-gradient(135deg, #B9090B 0%, #8B0000 100%);
+  color: #F5F5F5;
+  border: none;
+  padding: 1.2rem 2.5rem;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  box-shadow: 
+    0 4px 15px rgba(185, 9, 11, 0.4),
+    0 0 20px rgba(185, 9, 11, 0.3);
+  position: relative;
+  overflow: hidden;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.btn-contacto::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(255, 255, 255, 0.2), 
+    transparent);
+  transition: left 0.5s;
+}
+
+.btn-contacto:hover::before {
+  left: 100%;
+}
+
+.btn-contacto:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 6px 20px rgba(185, 9, 11, 0.6),
+    0 0 30px rgba(185, 9, 11, 0.4);
+}
+
+/* Sección Lista */
+.seccion-lista {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+}
+
+.encabezado-lista h2 {
+  color: #F5F5F5;
+  font-size: 2.8rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  font-weight: 300;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.encabezado-lista p {
+  color: rgba(245, 245, 245, 0.7);
+  text-align: center;
+  margin-bottom: 3rem;
+  line-height: 1.7;
+  font-size: 1.1rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.controles-lista {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3rem;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.buscador {
+  position: relative;
+  flex: 1;
+  max-width: 500px;
+  min-width: 300px;
+}
+
+.buscador i {
+  position: absolute;
+  left: 1.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #00D4FF;
+  z-index: 1;
+  text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+}
+
+.input-busqueda {
+  width: 100%;
+  padding: 1rem 1.5rem 1rem 4rem;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background: rgba(26, 26, 26, 0.8);
+  box-shadow: 
+    0 2px 10px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  font-family: inherit;
+  color: #F5F5F5;
+  backdrop-filter: blur(10px);
+}
+
+.input-busqueda:focus {
+  outline: none;
+  border-color: #00D4FF;
+  box-shadow: 
+    0 4px 15px rgba(0, 212, 255, 0.3),
+    0 0 20px rgba(0, 212, 255, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.input-busqueda::placeholder {
+  color: rgba(245, 245, 245, 0.5);
+}
+
+/* Controles Derecha */
+.controles-derecha {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+/* Botón Reservas Canceladas */
+.btn-inactivos {
+  background: rgba(26, 26, 26, 0.8);
+  color: rgba(245, 245, 245, 0.7);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  padding: 0.8rem 1.5rem;
+  border-radius: 50px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  position: relative;
+  font-family: inherit;
+  backdrop-filter: blur(10px);
+}
+
+.btn-inactivos:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(0, 212, 255, 0.3);
+  color: #00D4FF;
+}
+
+.btn-inactivos.activo {
+  background: rgba(0, 212, 255, 0.1);
+  color: #00D4FF;
+  border-color: #00D4FF;
+  box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
+}
+
+.badge-contador {
+  background: #B9090B;
+  color: #F5F5F5;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 600;
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  box-shadow: 0 0 10px rgba(185, 9, 11, 0.5);
+}
+
+.btn-leer-mas {
+  background: linear-gradient(135deg, #00D4FF 0%, #0099CC 100%);
+  color: #0A0A0A;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  box-shadow: 
+    0 4px 15px rgba(0, 212, 255, 0.4),
+    0 0 20px rgba(0, 212, 255, 0.3);
+  font-family: inherit;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-leer-mas::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(255, 255, 255, 0.3), 
+    transparent);
+  transition: left 0.5s;
+}
+
+.btn-leer-mas:hover::before {
+  left: 100%;
+}
+
+.btn-leer-mas:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 6px 20px rgba(0, 212, 255, 0.6),
+    0 0 30px rgba(0, 212, 255, 0.4);
+}
+
+/* Contenedor del Formulario */
+.formulario-contenedor {
+  margin-bottom: 3rem;
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Lista de Reservas */
+.lista-reservas {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+  gap: 2rem;
+}
+
+.tarjeta-reserva {
+  background: rgba(26, 26, 26, 0.8);
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 
+    0 4px 20px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.05);
+  transition: all 0.3s ease;
+  border-left: 5px solid #00D4FF;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+}
+
+.tarjeta-reserva::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #B9090B, #00D4FF);
+}
+
+.tarjeta-reserva:hover {
+  transform: translateY(-5px);
+  box-shadow: 
+    0 8px 30px rgba(0, 0, 0, 0.5),
+    0 0 30px rgba(0, 212, 255, 0.1);
+}
+
+/* Estados de reserva */
+.reserva-pendiente {
+  border-left-color: #FFA500;
+}
+
+.reserva-pendiente::before {
+  background: #FFA500;
+}
+
+.reserva-confirmada {
+  border-left-color: #00D4FF;
+}
+
+.reserva-confirmada::before {
+  background: #00D4FF;
+}
+
+.reserva-utilizada {
+  border-left-color: #27ae60;
+}
+
+.reserva-utilizada::before {
+  background: #27ae60;
+}
+
+/* ESTRUCTURA GRID PARA LA TARJETA */
+.contenido-tarjeta {
+  display: grid;
+  grid-template-columns: 1fr 120px;
+  grid-template-rows: auto auto 1fr auto;
+  gap: 1rem;
+  align-items: start;
+}
+
+/* Encabezado con ID y Estado */
+.encabezado-tarjeta {
+  grid-column: 1 / span 2;
+  grid-row: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.info-principal {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  gap: 1rem;
+}
+
+/* Estilos para el ID de reserva */
+.id-reserva {
+  color: #00D4FF;
+  font-size: 0.9rem;
+  font-weight: 700;
+  background: rgba(0, 212, 255, 0.1);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  display: inline-block;
+  border: 2px solid #00D4FF;
+  letter-spacing: 0.5px;
+  text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+}
+
+/* Badge de estado */
+.badge-estado {
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.estado-pendiente {
+  background: linear-gradient(135deg, #FFA500 0%, #FF8C00 100%);
+  color: #0A0A0A;
+  box-shadow: 0 2px 8px rgba(255, 165, 0, 0.3);
+}
+
+.estado-confirmada {
+  background: linear-gradient(135deg, #00D4FF 0%, #0099CC 100%);
+  color: #0A0A0A;
+  box-shadow: 0 2px 8px rgba(0, 212, 255, 0.3);
+}
+
+.estado-utilizada {
+  background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+  color: #F5F5F5;
+  box-shadow: 0 2px 8px rgba(39, 174, 96, 0.3);
+}
+
+.estado-cancelada {
+  background: linear-gradient(135deg, #B9090B 0%, #8B0000 100%);
+  color: #F5F5F5;
+  box-shadow: 0 2px 8px rgba(185, 9, 11, 0.3);
+}
+
+/* Badge de precio */
+.badge-precio {
+  background: linear-gradient(135deg, #B9090B 0%, #8B0000 100%);
+  color: #F5F5F5;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  box-shadow: 0 2px 8px rgba(185, 9, 11, 0.3);
+  white-space: nowrap;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.badge-precio.cancelada {
+  background: linear-gradient(135deg, #5a6c7d 0%, #4a5a6a 100%);
+  opacity: 0.7;
+}
+
+/* Información de la película */
+.info-pelicula {
+  grid-column: 1 / span 2;
+  grid-row: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.titulo-pelicula {
+  color: #F5F5F5;
+  font-size: 1.4rem;
+  font-weight: 600;
+  line-height: 1.3;
+  margin: 0;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.detalles-funcion {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.detalles-funcion span {
+  color: #00D4FF;
+  font-size: 0.9rem;
+  background: rgba(0, 212, 255, 0.1);
+  padding: 0.3rem 0.8rem;
+  border-radius: 15px;
+  border: 1px solid #00D4FF;
+}
+
+/* Detalles de la reserva */
+.detalles-reserva {
+  grid-column: 1;
+  grid-row: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.detalle {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  color: rgba(245, 245, 245, 0.8);
+  font-size: 0.9rem;
+  padding: 0.3rem 0;
+}
+
+.detalle i {
+  width: 16px;
+  color: #00D4FF;
+  text-align: center;
+  font-size: 0.9rem;
+  text-shadow: 0 0 8px rgba(0, 212, 255, 0.5);
+}
+
+/* Contenedor QR */
+.qr-contenedor {
+  grid-column: 2;
+  grid-row: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  align-self: start;
+}
+
+.codigo-qr {
+  width: 80px;
+  height: 80px;
+  background: rgba(0, 212, 255, 0.1);
+  border: 2px solid #00D4FF;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #00D4FF;
+  font-size: 1.5rem;
+  box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
+}
+
+.codigo-qr.cancelado {
+  background: rgba(185, 9, 11, 0.1);
+  border-color: #B9090B;
+  color: #B9090B;
+  box-shadow: 0 0 15px rgba(185, 9, 11, 0.3);
+}
+
+.codigo-texto {
+  font-size: 0.7rem;
+  font-weight: 700;
+  margin-top: 0.3rem;
+}
+
+.fecha-reserva {
+  font-size: 0.7rem;
+  color: rgba(245, 245, 245, 0.6);
+  text-align: center;
+}
+
+/* Acciones */
+.acciones-tarjeta {
+  grid-column: 1 / span 2;
+  grid-row: 4;
+  display: flex;
+  gap: 0.8rem;
+  margin-top: 1.5rem;
+}
+
+.btn-editar, .btn-confirmar, .btn-utilizada, .btn-cancelar, .btn-restaurar {
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1;
+  justify-content: center;
+  font-family: inherit;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.btn-editar {
+  background: linear-gradient(135deg, #00D4FF 0%, #0099CC 100%);
+  color: #0A0A0A;
+}
+
+.btn-editar:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 212, 255, 0.4);
+}
+
+.btn-confirmar {
+  background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+  color: #F5F5F5;
+}
+
+.btn-confirmar:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(39, 174, 96, 0.4);
+}
+
+.btn-utilizada {
+  background: linear-gradient(135deg, #FFA500 0%, #FF8C00 100%);
+  color: #0A0A0A;
+}
+
+.btn-utilizada:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 165, 0, 0.4);
+}
+
+.btn-cancelar {
+  background: linear-gradient(135deg, #B9090B 0%, #8B0000 100%);
+  color: #F5F5F5;
+}
+
+.btn-cancelar:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(185, 9, 11, 0.4);
+}
+
+.btn-restaurar {
+  background: linear-gradient(135deg, #00D4FF 0%, #0099CC 100%);
+  color: #0A0A0A;
+}
+
+.btn-restaurar:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 212, 255, 0.4);
+}
+
+/* Sección Canceladas */
+.seccion-canceladas {
+  margin-top: 0;
+}
+
+.titulo-canceladas {
+  color: rgba(245, 245, 245, 0.8);
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+}
+
+.contador-canceladas {
+  background: #B9090B;
+  color: #F5F5F5;
+  padding: 0.2rem 0.6rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  box-shadow: 0 0 10px rgba(185, 9, 11, 0.5);
+}
+
+/* Tarjetas Canceladas */
+.tarjeta-cancelada {
+  border-left-color: #B9090B;
+  opacity: 0.8;
+  background: rgba(26, 26, 26, 0.6);
+}
+
+.tarjeta-cancelada::before {
+  background: #B9090B;
+}
+
+.tarjeta-cancelada:hover {
+  opacity: 1;
+}
+
+/* Lista Vacía */
+.lista-vacia {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: rgba(245, 245, 245, 0.7);
+  background: rgba(26, 26, 26, 0.8);
+  border-radius: 12px;
+  box-shadow: 
+    0 4px 20px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.05);
+  margin-top: 2rem;
+  grid-column: 1 / -1;
+  backdrop-filter: blur(10px);
+}
+
+.icono-vacio {
+  font-size: 4rem;
+  color: rgba(0, 212, 255, 0.3);
+  margin-bottom: 1.5rem;
+  text-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+}
+
+.lista-vacia h3 {
+  color: #F5F5F5;
+  margin-bottom: 1rem;
+  font-size: 1.8rem;
+  font-weight: 300;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.lista-vacia p {
+  margin-bottom: 2.5rem;
+  font-size: 1.1rem;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  color: rgba(245, 245, 245, 0.7);
+}
+
+.btn-primario {
+  background: linear-gradient(135deg, #B9090B 0%, #8B0000 100%);
+  color: #F5F5F5;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  box-shadow: 
+    0 4px 15px rgba(185, 9, 11, 0.4),
+    0 0 20px rgba(185, 9, 11, 0.3);
+  font-family: inherit;
+  position: relative;
+  overflow: hidden;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.btn-primario::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(255, 255, 255, 0.2), 
+    transparent);
+  transition: left 0.5s;
+}
+
+.btn-primario:hover::before {
+  left: 100%;
+}
+
+.btn-primario:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 6px 20px rgba(185, 9, 11, 0.6),
+    0 0 30px rgba(185, 9, 11, 0.4);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero {
+    padding: 3rem 1rem;
+  }
+  
+  .contenido-hero h1 {
+    font-size: 2.5rem;
+  }
+  
+  .seccion-lista {
+    padding: 2rem 1rem;
+  }
+  
+  .controles-lista {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .controles-derecha {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .buscador {
+    max-width: none;
+    min-width: auto;
+  }
+  
+  .btn-inactivos, .btn-leer-mas {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .lista-reservas {
+    grid-template-columns: 1fr;
+  }
+  
+  /* RESPONSIVE PARA LA ESTRUCTURA */
+  .contenido-tarjeta {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto auto auto;
+    gap: 1rem;
+    text-align: center;
+  }
+  
+  .encabezado-tarjeta {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  
+  .info-pelicula {
+    grid-column: 1;
+    grid-row: 2;
+  }
+  
+  .detalles-reserva {
+    grid-column: 1;
+    grid-row: 3;
+  }
+  
+  .qr-contenedor {
+    grid-column: 1;
+    grid-row: 4;
+    margin: 0 auto;
+  }
+  
+  .acciones-tarjeta {
+    grid-column: 1;
+    grid-row: 5;
+    flex-direction: column;
+  }
+  
+  .info-principal {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .btn-editar, .btn-confirmar, .btn-utilizada, .btn-cancelar, .btn-restaurar {
+    width: 100%;
+  }
+  
+  .detalles-funcion {
+    justify-content: center;
+  }
+  
+  .detalle {
+    justify-content: center;
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .qr-contenedor {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .titulo-pelicula {
+    font-size: 1.2rem;
+  }
+  
+  .detalles-funcion span {
+    font-size: 0.8rem;
+  }
+  
+  .badge-estado, .badge-precio {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.8rem;
+  }
+  
+  .id-reserva {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.8rem;
+  }
+  
+  .detalle {
+    font-size: 0.8rem;
+    gap: 0.6rem;
+  }
+  
+  .detalle i {
+    width: 14px;
+    font-size: 0.8rem;
+  }
+}
+
+/* Efectos de brillo para elementos importantes */
+@keyframes glowPulse {
+  0%, 100% { 
+    box-shadow: 
+      0 4px 15px rgba(185, 9, 11, 0.4),
+      0 0 20px rgba(185, 9, 11, 0.3);
+  }
+  50% { 
+    box-shadow: 
+      0 4px 20px rgba(185, 9, 11, 0.6),
+      0 0 30px rgba(185, 9, 11, 0.4);
+  }
+}
+
+.btn-contacto, .btn-primario {
+  animation: glowPulse 2s ease-in-out infinite;
+}

@@ -1,0 +1,264 @@
+<div class="contenedor-principal">
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="contenido-hero">
+      <h1>Reserva de <strong>Boletos de Cine</strong></h1>
+      <p class="descripcion-hero">
+        Sistema de gestión de reservas para cine.
+        Administre eficientemente las reservas de sus clientes.
+      </p>
+      <button class="btn-contacto" (click)="onNuevaReserva()">
+        <i class="fas fa-ticket-alt"></i>
+        Nueva Reserva
+      </button>
+    </div>
+  </section>
+
+  <!-- Sección Lista -->
+  <section class="seccion-lista">
+    <div class="encabezado-lista">
+      <h2>Gestión de Reservas</h2>
+      <p>
+        Administre las reservas de boletos del cine. Agregue, edite o cancele reservas
+        según sea necesario.
+      </p>
+
+      <div class="controles-lista">
+        <div class="buscador">
+          <i class="fas fa-search"></i>
+          <input type="text" [(ngModel)]="textoBusqueda"
+            [placeholder]="mostrarReservasCanceladas ? 'Buscar reservas canceladas...' : 'Buscar reservas activas...'"
+            class="input-busqueda">
+        </div>
+
+        <div class="controles-derecha">
+          <button class="btn-inactivos" (click)="toggleReservasCanceladas()" [class.activo]="mostrarReservasCanceladas">
+            <i class="fas fa-ban"></i>
+            {{ mostrarReservasCanceladas ? 'Ver Activas' : 'Ver Canceladas' }}
+            <span class="badge-contador" *ngIf="reservasCanceladas.length > 0">
+              {{ reservasCanceladas.length }}
+            </span>
+          </button>
+
+          <button class="btn-leer-mas" (click)="onNuevaReserva()" *ngIf="!mostrarReservasCanceladas">
+            <i class="fas fa-plus-circle"></i>
+            Nueva Reserva
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Formulario -->
+    <div *ngIf="mostrarFormulario" class="formulario-contenedor">
+      <app-formulario-reserva [reserva]="reservaEditando" (guardar)="onGuardarReserva($event)"
+        (cancelar)="onCancelarFormulario()"></app-formulario-reserva>
+    </div>
+
+    <!-- Lista de Reservas Activas (SOLO cuando NO se muestran canceladas) -->
+    <div *ngIf="!mostrarReservasCanceladas">
+      <!-- Reservas Activas -->
+      <div class="lista-reservas" *ngIf="reservasFiltradas.length > 0 && !mostrarFormulario">
+        <div *ngFor="let reserva of reservasFiltradas" class="tarjeta-reserva"
+          [class.reserva-pendiente]="reserva.estado === 'pendiente'"
+          [class.reserva-confirmada]="reserva.estado === 'confirmada'"
+          [class.reserva-utilizada]="reserva.estado === 'utilizada'">
+          <div class="contenido-tarjeta">
+            <!-- Encabezado con ID y Estado -->
+            <div class="encabezado-tarjeta">
+              <div class="info-principal">
+                <div class="id-reserva">Reserva #{{ reserva.id }}</div>
+                <div class="badge-estado" [class]="'estado-' + reserva.estado">
+                  {{ reserva.estado | titlecase }}
+                </div>
+              </div>
+              <div class="badge-precio">
+                {{ formatearPrecio(reserva.precioTotal) }}
+              </div>
+            </div>
+
+            <!-- Información de la película -->
+            <div class="info-pelicula">
+              <h3 class="titulo-pelicula">{{ reserva.tituloPelicula }}</h3>
+              <div class="detalles-funcion">
+                <span class="fecha-funcion">{{ formatearFecha(reserva.fechaFuncion) }}</span>
+                <span class="hora-funcion">{{ reserva.horaFuncion }}</span>
+                <span class="sala-funcion">Sala {{ reserva.sala }}</span>
+              </div>
+            </div>
+
+            <!-- Detalles de la reserva -->
+            <div class="detalles-reserva">
+              <div class="detalle">
+                <i class="fas fa-user"></i>
+                <span>{{ reserva.nombreCliente }}</span>
+              </div>
+
+              <div class="detalle">
+                <i class="fas fa-phone"></i>
+                <span>{{ reserva.telefonoCliente }}</span>
+              </div>
+
+              <div class="detalle">
+                <i class="fas fa-ticket-alt"></i>
+                <span>{{ reserva.cantidadBoletos }} boletos - {{ reserva.tipoBoleto | titlecase }}</span>
+              </div>
+
+              <div class="detalle">
+                <i class="fas fa-chair"></i>
+                <span>Asientos: {{ reserva.asientos.join(', ') }}</span>
+              </div>
+
+              <div class="detalle" *ngIf="reserva.metodoPago">
+                <i class="fas fa-credit-card"></i>
+                <span>Pago: {{ reserva.metodoPago | titlecase }}</span>
+              </div>
+            </div>
+
+            <!-- Código QR a la derecha -->
+            <div class="qr-contenedor">
+              <div class="codigo-qr">
+                <i class="fas fa-qrcode"></i>
+                <span class="codigo-texto">#{{ reserva.id.toString().padStart(6, '0') }}</span>
+              </div>
+              <div class="fecha-reserva">
+                Reserva: {{ formatearFecha(reserva.fechaReserva) }}
+              </div>
+            </div>
+
+            <!-- Acciones -->
+            <div class="acciones-tarjeta">
+              <button class="btn-editar" (click)="onEditarReserva(reserva)"
+                *ngIf="reserva.estado === 'pendiente' || reserva.estado === 'confirmada'">
+                <i class="fas fa-edit"></i>
+                Editar
+              </button>
+
+              <button class="btn-confirmar" (click)="onConfirmarReserva(reserva.id)"
+                *ngIf="reserva.estado === 'pendiente'">
+                <i class="fas fa-check"></i>
+                Confirmar
+              </button>
+
+              <button class="btn-utilizada" (click)="onMarcarUtilizada(reserva.id)"
+                *ngIf="reserva.estado === 'confirmada'">
+                <i class="fas fa-check-double"></i>
+                Usada
+              </button>
+
+              <button class="btn-cancelar" (click)="onCancelarReserva(reserva.id)"
+                *ngIf="reserva.estado !== 'cancelada' && reserva.estado !== 'utilizada'">
+                <i class="fas fa-times"></i>
+                Cancelar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mensaje cuando no hay reservas activas -->
+      <div *ngIf="reservasFiltradas.length === 0 && !mostrarFormulario" class="lista-vacia">
+        <div class="icono-vacio">
+          <i class="fas fa-ticket-alt"></i>
+        </div>
+        <h3>No hay reservas activas</h3>
+        <p>Comienza creando la primera reserva del sistema</p>
+        <button class="btn-primario" (click)="onNuevaReserva()">
+          <i class="fas fa-plus"></i>
+          Crear Primera Reserva
+        </button>
+      </div>
+    </div>
+
+    <!-- Lista de Reservas Canceladas (SOLO cuando se muestran canceladas) -->
+    <div *ngIf="mostrarReservasCanceladas && !mostrarFormulario" class="seccion-canceladas">
+      <h3 class="titulo-canceladas">
+        <i class="fas fa-ban"></i>
+        Reservas Canceladas
+        <span class="contador-canceladas">({{ reservasCanceladas.length }})</span>
+      </h3>
+
+      <div class="lista-reservas" *ngIf="reservasCanceladasFiltradas.length > 0">
+        <div *ngFor="let reserva of reservasCanceladasFiltradas" class="tarjeta-reserva tarjeta-cancelada">
+          <div class="contenido-tarjeta">
+            <!-- Encabezado con ID y Estado -->
+            <div class="encabezado-tarjeta">
+              <div class="info-principal">
+                <div class="id-reserva">Reserva #{{ reserva.id }}</div>
+                <div class="badge-estado estado-cancelada">
+                  Cancelada
+                </div>
+              </div>
+              <div class="badge-precio cancelada">
+                {{ formatearPrecio(reserva.precioTotal) }}
+              </div>
+            </div>
+
+            <!-- Información de la película -->
+            <div class="info-pelicula">
+              <h3 class="titulo-pelicula">{{ reserva.tituloPelicula }}</h3>
+              <div class="detalles-funcion">
+                <span class="fecha-funcion">{{ formatearFecha(reserva.fechaFuncion) }}</span>
+                <span class="hora-funcion">{{ reserva.horaFuncion }}</span>
+                <span class="sala-funcion">Sala {{ reserva.sala }}</span>
+              </div>
+            </div>
+
+            <!-- Detalles de la reserva cancelada -->
+            <div class="detalles-reserva">
+              <div class="detalle">
+                <i class="fas fa-user"></i>
+                <span>{{ reserva.nombreCliente }}</span>
+              </div>
+
+              <div class="detalle">
+                <i class="fas fa-phone"></i>
+                <span>{{ reserva.telefonoCliente }}</span>
+              </div>
+
+              <div class="detalle">
+                <i class="fas fa-ticket-alt"></i>
+                <span>{{ reserva.cantidadBoletos }} boletos - {{ reserva.tipoBoleto | titlecase }}</span>
+              </div>
+
+              <div class="detalle">
+                <i class="fas fa-calendar-times"></i>
+                <span>Cancelada: {{ formatearFecha(reserva.fechaCancelacion || reserva.fechaReserva) }}</span>
+              </div>
+            </div>
+
+            <!-- Código QR cancelado a la derecha -->
+            <div class="qr-contenedor">
+              <div class="codigo-qr cancelado">
+                <i class="fas fa-times-circle"></i>
+                <span class="codigo-texto">CANCELADA</span>
+              </div>
+              <div class="fecha-reserva">
+                Reserva: {{ formatearFecha(reserva.fechaReserva) }}
+              </div>
+            </div>
+
+            <!-- Acciones -->
+            <div class="acciones-tarjeta">
+              <button class="btn-restaurar" (click)="onRestaurarReserva(reserva.id)">
+                <i class="fas fa-undo"></i>
+                Reactivar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="reservasCanceladasFiltradas.length === 0" class="lista-vacia">
+        <div class="icono-vacio">
+          <i class="fas fa-inbox"></i>
+        </div>
+        <h3>No hay reservas canceladas</h3>
+        <p>Las reservas que canceles aparecerán aquí</p>
+        <button class="btn-primario" (click)="toggleReservasCanceladas()">
+          <i class="fas fa-undo"></i>
+          Volver a Reservas Activas
+        </button>
+      </div>
+    </div>
+  </section>
+</div>

@@ -1,0 +1,366 @@
+/* Hero Services */
+.services-hero {
+  background: linear-gradient(135deg, 
+    rgba(185, 9, 11, 0.9) 0%, 
+    rgba(15, 27, 45, 0.95) 100%),
+    url('https://images.unsplash.com/photo-1536440136628-849c177e76a1?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');
+  background-size: cover;
+  background-position: center;
+  color: #F5F5F5;
+  padding: 8rem 2rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.services-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 30% 70%, rgba(0, 212, 255, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 70% 30%, rgba(185, 9, 11, 0.3) 0%, transparent 50%);
+  animation: floatBackground 15s ease-in-out infinite;
+}
+
+@keyframes floatBackground {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  50% { transform: scale(1.1) rotate(1deg); }
+}
+
+.services-hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.services-hero-title {
+  font-size: 4rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(135deg, #00D4FF 0%, #B9090B 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.services-hero-subtitle {
+  font-size: 1.3rem;
+  line-height: 1.6;
+  color: rgba(245, 245, 245, 0.9);
+}
+
+/* Servicios Grid */
+.servicios-completos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.servicio-completo-card {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  padding: 2.5rem;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.servicio-completo-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(255, 255, 255, 0.1), 
+    transparent);
+  transition: left 0.5s;
+}
+
+.servicio-completo-card:hover::before {
+  left: 100%;
+}
+
+.servicio-completo-card:hover {
+  transform: translateY(-10px);
+  border-color: #00D4FF;
+  box-shadow: 0 15px 40px rgba(0, 212, 255, 0.3);
+}
+
+.servicio-completo-card.destacado {
+  border-color: #B9090B;
+  background: linear-gradient(135deg, 
+    rgba(185, 9, 11, 0.1) 0%, 
+    rgba(255, 255, 255, 0.05) 100%);
+}
+
+.servicio-completo-card.destacado:hover {
+  box-shadow: 0 15px 40px rgba(185, 9, 11, 0.3);
+}
+
+.servicio-icon-large {
+  font-size: 4rem;
+  margin-bottom: 1.5rem;
+  display: block;
+}
+
+.servicio-titulo-large {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #F5F5F5;
+}
+
+.servicio-descripcion-large {
+  color: rgba(245, 245, 245, 0.8);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.servicio-caracteristicas {
+  list-style: none;
+  padding: 0;
+}
+
+.servicio-caracteristicas li {
+  color: rgba(245, 245, 245, 0.9);
+  margin-bottom: 0.5rem;
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.servicio-caracteristicas li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: #00D4FF;
+  font-weight: bold;
+}
+
+/* Planes de Precios */
+.precios-section {
+  background: linear-gradient(135deg, #0F1B2D 0%, #0A0A0A 100%);
+}
+
+.precios-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.precio-card {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  padding: 2.5rem;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.precio-card.popular {
+  border-color: #B9090B;
+  transform: scale(1.05);
+  background: linear-gradient(135deg, 
+    rgba(185, 9, 11, 0.1) 0%, 
+    rgba(255, 255, 255, 0.05) 100%);
+}
+
+.precio-card.popular::before {
+  content: 'MÁS POPULAR';
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #B9090B;
+  color: #F5F5F5;
+  padding: 0.5rem 1.5rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.precio-card:hover {
+  transform: translateY(-10px);
+  border-color: #00D4FF;
+  box-shadow: 0 15px 40px rgba(0, 212, 255, 0.3);
+}
+
+.precio-card.popular:hover {
+  transform: scale(1.05) translateY(-10px);
+}
+
+.plan-nombre {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #F5F5F5;
+}
+
+.plan-precio {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, #B9090B, #00D4FF);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.plan-periodo {
+  color: rgba(245, 245, 245, 0.7);
+  margin-bottom: 2rem;
+}
+
+.plan-caracteristicas {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 2rem;
+}
+
+.plan-caracteristicas li {
+  color: rgba(245, 245, 245, 0.9);
+  margin-bottom: 0.8rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.btn-plan {
+  width: 100%;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 50px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-plan-primary {
+  background: linear-gradient(135deg, #B9090B 0%, #8B0000 100%);
+  color: #F5F5F5;
+}
+
+.btn-plan-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(185, 9, 11, 0.4);
+}
+
+.btn-plan-secondary {
+  background: linear-gradient(135deg, #00D4FF 0%, #0099CC 100%);
+  color: #0A0A0A;
+}
+
+.btn-plan-secondary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 212, 255, 0.4);
+}
+
+/* FAQ Section */
+.faq-section {
+  background: rgba(26, 26, 26, 0.8);
+}
+
+.faq-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.faq-item {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 15px;
+  margin-bottom: 1rem;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.faq-pregunta {
+  padding: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  color: #F5F5F5;
+  transition: all 0.3s ease;
+}
+
+.faq-pregunta:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.faq-respuesta {
+  padding: 0 1.5rem;
+  max-height: 0;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  color: rgba(245, 245, 245, 0.8);
+}
+
+.faq-respuesta.active {
+  padding: 0 1.5rem 1.5rem;
+  max-height: 200px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .services-hero-title {
+    font-size: 2.5rem;
+  }
+  
+  .servicios-completos-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .precios-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .precio-card.popular {
+    transform: scale(1);
+  }
+  
+  .precio-card.popular:hover {
+    transform: translateY(-10px);
+  }
+}
+
+/* Secciones generales (reutilizar del componente inicio) */
+.section {
+  padding: 5rem 2rem;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 3rem;
+  margin-bottom: 3rem;
+  font-weight: 300;
+  color: #F5F5F5;
+}
+
+.section-title::after {
+  content: '';
+  display: block;
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, #B9090B, #00D4FF);
+  margin: 1rem auto;
+  border-radius: 2px;
+}

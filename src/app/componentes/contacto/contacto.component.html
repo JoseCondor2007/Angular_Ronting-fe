@@ -1,0 +1,360 @@
+<div class="contacto-container">
+  <!-- Hero Section -->
+  <section class="contact-hero">
+    <div class="contact-hero-content">
+      <h1 class="contact-hero-title">Contáctanos</h1>
+      <p class="contact-hero-subtitle">
+        Estamos aquí para ayudarte. Contáctanos para consultas, reservas o cualquier información que necesites sobre tu experiencia cinematográfica.
+      </p>
+    </div>
+  </section>
+
+  <!-- Formulario e Información Principal -->
+  <section class="contact-section section-dark">
+    <div class="contact-main-grid">
+      <!-- Formulario de Contacto -->
+      <div class="contact-form-container">
+        <h2 style="margin-bottom: 2rem; color: #F5F5F5; text-align: center;">Envíanos un Mensaje</h2>
+        
+        <form [formGroup]="contactoForm" (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <label class="form-label">Nombre Completo *</label>
+            <input 
+              type="text" 
+              class="form-control" 
+              formControlName="nombre"
+              [class.error]="esCampoInvalido('nombre')"
+              placeholder="Ingresa tu nombre completo"
+            >
+            <div class="error-message" *ngIf="esCampoInvalido('nombre')">
+              <i class="fas fa-exclamation-circle"></i>
+              {{ obtenerMensajeError('nombre') }}
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Correo Electrónico *</label>
+            <input 
+              type="email" 
+              class="form-control" 
+              formControlName="email"
+              [class.error]="esCampoInvalido('email')"
+              placeholder="tu&#64;email.com"
+            >
+            <div class="error-message" *ngIf="esCampoInvalido('email')">
+              <i class="fas fa-exclamation-circle"></i>
+              {{ obtenerMensajeError('email') }}
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Teléfono</label>
+            <input 
+              type="tel" 
+              class="form-control" 
+              formControlName="telefono"
+              [class.error]="esCampoInvalido('telefono')"
+              placeholder="+51 123 456 789"
+            >
+            <div class="error-message" *ngIf="esCampoInvalido('telefono')">
+              <i class="fas fa-exclamation-circle"></i>
+              {{ obtenerMensajeError('telefono') }}
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Departamento *</label>
+            <div class="select-wrapper">
+              <select 
+                class="form-control" 
+                formControlName="departamento"
+                [class.error]="esCampoInvalido('departamento')"
+                [style.borderColor]="getDepartamentoColor()"
+              >
+                <option value="">Selecciona un departamento</option>
+                <option value="Atención al Cliente">Atención al Cliente</option>
+                <option value="Reservas y Ventas">Reservas y Ventas</option>
+                <option value="Eventos Especiales">Eventos Especiales</option>
+                <option value="Marketing y Prensa">Marketing y Prensa</option>
+              </select>
+            </div>
+            <div class="error-message" *ngIf="esCampoInvalido('departamento')">
+              <i class="fas fa-exclamation-circle"></i>
+              {{ obtenerMensajeError('departamento') }}
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Asunto *</label>
+            <input 
+              type="text" 
+              class="form-control" 
+              formControlName="asunto"
+              [class.error]="esCampoInvalido('asunto')"
+              placeholder="Asunto de tu mensaje"
+            >
+            <div class="error-message" *ngIf="esCampoInvalido('asunto')">
+              <i class="fas fa-exclamation-circle"></i>
+              {{ obtenerMensajeError('asunto') }}
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Mensaje *</label>
+            <textarea 
+              class="form-control" 
+              formControlName="mensaje"
+              [class.error]="esCampoInvalido('mensaje')"
+              placeholder="Escribe tu mensaje aquí..."
+              rows="5"
+            ></textarea>
+            <div class="error-message" *ngIf="esCampoInvalido('mensaje')">
+              <i class="fas fa-exclamation-circle"></i>
+              {{ obtenerMensajeError('mensaje') }}
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="checkbox-group" (click)="contactoForm.patchValue({newsletter: !contactoForm.get('newsletter')?.value})">
+              <div class="checkbox-custom" [class.checked]="contactoForm.get('newsletter')?.value"></div>
+              <span>Suscribirme al newsletter para recibir promociones</span>
+            </label>
+          </div>
+
+          <button 
+            type="submit" 
+            class="btn-submit"
+            [class.loading]="enviandoFormulario"
+            [disabled]="enviandoFormulario"
+          >
+            <span *ngIf="!enviandoFormulario">
+              <i class="fas fa-paper-plane"></i>
+              Enviar Mensaje
+            </span>
+            <span *ngIf="enviandoFormulario">
+              <i class="fas fa-spinner fa-spin"></i>
+              Enviando...
+            </span>
+          </button>
+
+          <div class="success-message" *ngIf="formularioEnviado">
+            <i class="fas fa-check-circle"></i>
+            ¡Mensaje enviado con éxito! Te contactaremos pronto.
+          </div>
+        </form>
+      </div>
+
+      <!-- Información de Contacto -->
+      <div class="contact-info-sidebar">
+        <!-- Información General -->
+        <div class="contact-info-card">
+          <h3 class="info-card-title">
+            <i class="fas fa-info-circle"></i>
+            Información General
+          </h3>
+          <div class="info-item" (click)="hacerLlamada('+51 1 600-1234')">
+            <div class="info-icon">
+              <i class="fas fa-phone"></i>
+            </div>
+            <div class="info-content">
+              <h4>Teléfono Principal</h4>
+              <p>+51 1 600-1234</p>
+            </div>
+          </div>
+          <div class="info-item" (click)="enviarEmail('info&#64;cineplanet.com')">
+            <div class="info-icon">
+              <i class="fas fa-envelope"></i>
+            </div>
+            <div class="info-content">
+              <h4>Email General</h4>
+              <p>info&#64;cineplanet.com</p>
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon">
+              <i class="fas fa-clock"></i>
+            </div>
+            <div class="info-content">
+              <h4>Horario de Atención</h4>
+              <p>Lun-Dom: 8:00 AM - 11:00 PM</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Redes Sociales -->
+        <div class="contact-info-card">
+          <h3 class="info-card-title">
+            <i class="fas fa-hashtag"></i>
+            Síguenos en Redes
+          </h3>
+          <div class="social-grid">
+            <div class="social-item" (click)="abrirRedSocial('https://facebook.com')" title="Facebook">
+              <i class="fab fa-facebook-f"></i>
+            </div>
+            <div class="social-item" (click)="abrirRedSocial('https://twitter.com')" title="Twitter">
+              <i class="fab fa-twitter"></i>
+            </div>
+            <div class="social-item" (click)="abrirRedSocial('https://instagram.com')" title="Instagram">
+              <i class="fab fa-instagram"></i>
+            </div>
+            <div class="social-item" (click)="abrirRedSocial('https://youtube.com')" title="YouTube">
+              <i class="fab fa-youtube"></i>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mapa -->
+        <div class="contact-info-card">
+          <h3 class="info-card-title">
+            <i class="fas fa-map-marker-alt"></i>
+            Ubicación Central
+          </h3>
+          <div class="mapa-container">
+            <div class="mapa-placeholder">
+              <div style="text-align: center;">
+                <i class="fas fa-map" style="font-size: 3rem; margin-bottom: 1rem;"></i>
+                <p>Mapa interactivo</p>
+                <p style="font-size: 0.9rem;">Haz clic para ver en Google Maps</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sucursales -->
+  <section class="contact-section section-light">
+    <h2 class="section-title">Nuestras Sucursales</h2>
+    <div class="sucursales-grid">
+      <div class="sucursal-card">
+        <img src="data:image/jpeg;base64,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" alt="CinePlanet Miraflores" class="sucursal-imagen">
+        <div class="sucursal-content">
+          <h3 class="sucursal-nombre">MegaCine Miraflores</h3>
+          <div class="sucursal-info">
+            <p><i class="fas fa-map-marker-alt"></i> Av. Larco 123, Miraflores</p>
+            <p><i class="fas fa-phone"></i> +51 1 234-5678</p>
+            <p><i class="fas fa-clock"></i> 9:00 AM - 1:00 AM</p>
+          </div>
+          <div class="sucursal-actions">
+            <button class="btn-sucursal btn-mapa" (click)="abrirGoogleMaps('-12.1194,-77.0342')">
+              <i class="fas fa-map"></i>
+              Ver Mapa
+            </button>
+            <button class="btn-sucursal btn-llamar" (click)="hacerLlamada('+5112345678')">
+              <i class="fas fa-phone"></i>
+              Llamar
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      <div class="sucursal-card">
+        <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="CinePlanet San Isidro" class="sucursal-imagen">
+        <div class="sucursal-content">
+          <h3 class="sucursal-nombre">MegaCine San Isidro</h3>
+          <div class="sucursal-info">
+            <p><i class="fas fa-map-marker-alt"></i> Av. Javier Prado 456, San Isidro</p>
+            <p><i class="fas fa-phone"></i> +51 1 345-6789</p>
+            <p><i class="fas fa-clock"></i> 9:00 AM - 1:00 AM</p>
+          </div>
+          <div class="sucursal-actions">
+            <button class="btn-sucursal btn-mapa" (click)="abrirGoogleMaps('-12.0973,-77.0505')">
+              <i class="fas fa-map"></i>
+              Ver Mapa
+            </button>
+            <button class="btn-sucursal btn-llamar" (click)="hacerLlamada('+5113456789')">
+              <i class="fas fa-phone"></i>
+              Llamar
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      <div class="sucursal-card">
+        <img src="https://images.unsplash.com/photo-1595769816263-9b910be24d5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="CinePlanet La Molina" class="sucursal-imagen">
+        <div class="sucursal-content">
+          <h3 class="sucursal-nombre">MegaCine La Molina</h3>
+          <div class="sucursal-info">
+            <p><i class="fas fa-map-marker-alt"></i> Av. La Molina 789, La Molina</p>
+            <p><i class="fas fa-phone"></i> +51 1 456-7890</p>
+            <p><i class="fas fa-clock"></i> 9:00 AM - 12:00 AM</p>
+          </div>
+          <div class="sucursal-actions">
+            <button class="btn-sucursal btn-mapa" (click)="abrirGoogleMaps('-12.0840,-76.9486')">
+              <i class="fas fa-map"></i>
+              Ver Mapa
+            </button>
+            <button class="btn-sucursal btn-llamar" (click)="hacerLlamada('+5114567890')">
+              <i class="fas fa-phone"></i>
+              Llamar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Departamentos de Contacto -->
+  <section class="contact-section section-dark">
+    <h2 class="section-title">Departamentos de Contacto</h2>
+    <div class="departamentos-grid">
+      <div class="departamento-card">
+        <div class="departamento-icon">
+          <i class="fas fa-headset"></i>
+        </div>
+        <h3 class="departamento-nombre">Atención al Cliente</h3>
+        <p class="departamento-info">Responsable: María González</p>
+        <div class="departamento-contacto">
+          <p (click)="enviarEmail('atencion&#64;cineplanet.com')">
+            <i class="fas fa-envelope"></i>
+            atencion&#64;cineplanet.com
+          </p>
+          <p (click)="hacerLlamada('+51 1 600-1001')">
+            <i class="fas fa-phone"></i>
+            +51 1 600-1001
+          </p>
+          <p><i class="fas fa-clock"></i> Lun-Dom: 8:00 AM - 11:00 PM</p>
+        </div>
+      </div>
+      
+      <div class="departamento-card">
+        <div class="departamento-icon">
+          <i class="fas fa-ticket-alt"></i>
+        </div>
+        <h3 class="departamento-nombre">Reservas y Ventas</h3>
+        <p class="departamento-info">Responsable: Carlos Rodríguez</p>
+        <div class="departamento-contacto">
+          <p (click)="enviarEmail('reservas&#64;cineplanet.com')">
+            <i class="fas fa-envelope"></i>
+            reservas&#64;cineplanet.com
+          </p>
+          <p (click)="hacerLlamada('+51 1 600-1002')">
+            <i class="fas fa-phone"></i>
+            +51 1 600-1002
+          </p>
+          <p><i class="fas fa-clock"></i> Lun-Dom: 9:00 AM - 11:00 PM</p>
+        </div>
+      </div>
+      
+      <div class="departamento-card">
+        <div class="departamento-icon">
+          <i class="fas fa-calendar-star"></i>
+        </div>
+        <h3 class="departamento-nombre">Eventos Especiales</h3>
+        <p class="departamento-info">Responsable: Ana Martínez</p>
+        <div class="departamento-contacto">
+          <p (click)="enviarEmail('eventos&#64;cineplanet.com')">
+            <i class="fas fa-envelope"></i>
+            eventos&#64;cineplanet.com
+          </p>
+          <p (click)="hacerLlamada('+51 1 600-1003')">
+            <i class="fas fa-phone"></i>
+            +51 1 600-1003
+          </p>
+          <p><i class="fas fa-clock"></i> Lun-Vie: 9:00 AM - 6:00 PM</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

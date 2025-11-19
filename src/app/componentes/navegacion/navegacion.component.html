@@ -1,0 +1,42 @@
+<nav class="navegacion" *ngIf="mostrarNavegacion">
+  <div class="contenedor-navegacion">
+    <div class="logo">
+      <h2>🎬 CinePlus</h2>
+    </div>
+    
+    <div class="menu" [class.menu-abierto]="menuAbierto">
+      <a 
+        routerLink="/inicio" 
+        [class.enlace-activo]="esRutaActiva('/inicio')"
+        (click)="navegarYcerrarMenu('/inicio')">
+        INICIO
+      </a>
+      <a 
+        routerLink="/reservas" 
+        [class.enlace-activo]="esRutaActiva('/reservas')"
+        (click)="navegarYcerrarMenu('/reservas')">
+        RESERVAS
+      </a>
+      <a 
+        routerLink="/servicios" 
+        [class.enlace-activo]="esRutaActiva('/servicios')"
+        (click)="navegarYcerrarMenu('/servicios')">
+        SERVICIOS
+      </a>
+      <a 
+        routerLink="/contacto" 
+        [class.enlace-activo]="esRutaActiva('/contacto')"
+        (click)="navegarYcerrarMenu('/contacto')">
+        CONTACTO
+      </a>
+      <button class="btn-cerrar-sesion" (click)="cerrarSesion()">
+        <i class="fas fa-sign-out-alt"></i>
+        CERRAR SESIÓN
+      </button>
+    </div>
+    
+    <button class="btn-menu" (click)="alternarMenu()">
+      <i class="fas fa-bars"></i>
+    </button>
+  </div>
+</nav>

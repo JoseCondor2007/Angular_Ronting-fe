@@ -1,0 +1,282 @@
+<div class="formulario-contenedor">
+  <h3 class="titulo-formulario">
+    {{ esEdicion ? 'Editar Reserva' : 'Nueva Reserva' }}
+  </h3>
+  
+  <form [formGroup]="formularioReserva" (ngSubmit)="onSubmit()" class="formulario">
+    <!-- Campo ID (solo visible en edición) -->
+    <div class="grupo-formulario" *ngIf="esEdicion">
+      <label for="id">ID de Reserva</label>
+      <input
+        type="text"
+        id="id"
+        [value]="reserva?.id"
+        class="control-formulario"
+        disabled
+        placeholder="ID generado automáticamente"
+      >
+      <div class="mensaje-info">
+        <i class="fas fa-info-circle"></i>
+        ID generado automáticamente por el sistema
+      </div>
+    </div>
+
+    <!-- Selección de Película -->
+    <div class="grupo-formulario" [class.error]="esCampoInvalido('idPelicula')">
+      <label for="idPelicula">Película *</label>
+      <select
+        id="idPelicula"
+        formControlName="idPelicula"
+        class="control-formulario"
+        (change)="onPeliculaSeleccionada($event)"
+      >
+        <option value="">Seleccione una película</option>
+        <option *ngFor="let pelicula of peliculas" [value]="pelicula.id">
+          {{ pelicula.titulo }} - {{ pelicula.duracion }}min
+        </option>
+      </select>
+      <div class="mensaje-error" *ngIf="esCampoInvalido('idPelicula')">
+        {{ obtenerMensajeError('idPelicula') }}
+      </div>
+    </div>
+
+    <!-- Fecha y Hora de Función -->
+    <div class="grupo-fecha-hora">
+      <div class="grupo-formulario" [class.error]="esCampoInvalido('fechaFuncion')">
+        <label for="fechaFuncion">Fecha de Función *</label>
+        <input
+          type="date"
+          id="fechaFuncion"
+          formControlName="fechaFuncion"
+          class="control-formulario"
+          [min]="fechaHoy"
+        >
+        <div class="mensaje-error" *ngIf="esCampoInvalido('fechaFuncion')">
+          {{ obtenerMensajeError('fechaFuncion') }}
+        </div>
+      </div>
+
+      <div class="grupo-formulario" [class.error]="esCampoInvalido('horaFuncion')">
+        <label for="horaFuncion">Hora de Función *</label>
+        <select
+          id="horaFuncion"
+          formControlName="horaFuncion"
+          class="control-formulario"
+        >
+          <option value="">Seleccione hora</option>
+          <option *ngFor="let hora of horariosDisponibles" [value]="hora">
+            {{ hora }}
+          </option>
+        </select>
+        <div class="mensaje-error" *ngIf="esCampoInvalido('horaFuncion')">
+          {{ obtenerMensajeError('horaFuncion') }}
+        </div>
+      </div>
+    </div>
+
+    <!-- Sala y Asientos -->
+    <div class="grupo-sala-asientos">
+      <div class="grupo-formulario" [class.error]="esCampoInvalido('sala')">
+        <label for="sala">Sala *</label>
+        <select
+          id="sala"
+          formControlName="sala"
+          class="control-formulario"
+        >
+          <option value="">Seleccione sala</option>
+          <option *ngFor="let sala of salas" [value]="sala">
+            Sala {{ sala }}
+          </option>
+        </select>
+        <div class="mensaje-error" *ngIf="esCampoInvalido('sala')">
+          {{ obtenerMensajeError('sala') }}
+        </div>
+      </div>
+
+      <div class="grupo-formulario" [class.error]="esCampoInvalido('cantidadBoletos')">
+        <label for="cantidadBoletos">Cantidad de Boletos *</label>
+        <input
+          type="number"
+          id="cantidadBoletos"
+          formControlName="cantidadBoletos"
+          placeholder="Número de boletos"
+          min="1"
+          max="10"
+          class="control-formulario"
+          (change)="onCantidadBoletosChange()"
+        >
+        <div class="mensaje-error" *ngIf="esCampoInvalido('cantidadBoletos')">
+          {{ obtenerMensajeError('cantidadBoletos') }}
+        </div>
+      </div>
+    </div>
+
+    <!-- Selección de Asientos -->
+    <div class="grupo-formulario" *ngIf="formularioReserva.get('cantidadBoletos')?.value > 0">
+      <label>Seleccione Asientos *</label>
+      <div class="contenedor-asientos">
+        <div 
+          *ngFor="let asiento of asientosDisponibles" 
+          class="asiento"
+          [class.seleccionado]="estaSeleccionado(asiento)"
+          [class.ocupado]="estaOcupado(asiento)"
+          (click)="seleccionarAsiento(asiento)"
+        >
+          {{ asiento }}
+        </div>
+      </div>
+      <div class="mensaje-error" *ngIf="esCampoInvalido('asientos')">
+        {{ obtenerMensajeError('asientos') }}
+      </div>
+      <div class="leyenda-asientos">
+        <div class="leyenda-item">
+          <div class="asiento disponible"></div>
+          <span>Disponible</span>
+        </div>
+        <div class="leyenda-item">
+          <div class="asiento seleccionado"></div>
+          <span>Seleccionado</span>
+        </div>
+        <div class="leyenda-item">
+          <div class="asiento ocupado"></div>
+          <span>Ocupado</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tipo de Boletos y Precio -->
+    <div class="grupo-tipo-precio">
+      <div class="grupo-formulario" [class.error]="esCampoInvalido('tipoBoleto')">
+        <label for="tipoBoleto">Tipo de Boleto *</label>
+        <select
+          id="tipoBoleto"
+          formControlName="tipoBoleto"
+          class="control-formulario"
+          (change)="calcularPrecioTotal()"
+        >
+          <option value="">Seleccione tipo</option>
+          <option value="adulto">Adulto - $12.00</option>
+          <option value="niño">Niño - $8.00</option>
+          <option value="estudiante">Estudiante - $10.00</option>
+          <option value="tercera-edad">Tercera Edad - $9.00</option>
+        </select>
+        <div class="mensaje-error" *ngIf="esCampoInvalido('tipoBoleto')">
+          {{ obtenerMensajeError('tipoBoleto') }}
+        </div>
+      </div>
+
+      <div class="grupo-formulario">
+        <label for="precioTotal">Precio Total</label>
+        <input
+          type="text"
+          id="precioTotal"
+          [value]="'$' + (formularioReserva.get('precioTotal')?.value || '0.00')"
+          class="control-formulario"
+          disabled
+        >
+        <div class="mensaje-info">
+          <i class="fas fa-calculator"></i>
+          Precio calculado automáticamente
+        </div>
+      </div>
+    </div>
+
+    <!-- Información del Cliente -->
+    <div class="grupo-cliente">
+      <div class="grupo-formulario" [class.error]="esCampoInvalido('nombreCliente')">
+        <label for="nombreCliente">Nombre del Cliente *</label>
+        <input
+          type="text"
+          id="nombreCliente"
+          formControlName="nombreCliente"
+          placeholder="Ingrese nombre completo"
+          class="control-formulario"
+        >
+        <div class="mensaje-error" *ngIf="esCampoInvalido('nombreCliente')">
+          {{ obtenerMensajeError('nombreCliente') }}
+        </div>
+      </div>
+
+      <div class="grupo-formulario" [class.error]="esCampoInvalido('telefonoCliente')">
+        <label for="telefonoCliente">Teléfono *</label>
+        <input
+          type="text"
+          id="telefonoCliente"
+          formControlName="telefonoCliente"
+          placeholder="Ingrese 9 dígitos"
+          class="control-formulario"
+        >
+        <div class="mensaje-error" *ngIf="esCampoInvalido('telefonoCliente')">
+          {{ obtenerMensajeError('telefonoCliente') }}
+        </div>
+      </div>
+
+      <div class="grupo-formulario" [class.error]="esCampoInvalido('correoCliente')">
+        <label for="correoCliente">Correo Electrónico *</label>
+        <input
+          type="email"
+          id="correoCliente"
+          formControlName="correoCliente"
+          placeholder="cliente@ejemplo.com"
+          class="control-formulario"
+        >
+        <div class="mensaje-error" *ngIf="esCampoInvalido('correoCliente')">
+          {{ obtenerMensajeError('correoCliente') }}
+        </div>
+      </div>
+    </div>
+
+    <!-- Método de Pago -->
+    <div class="grupo-formulario" [class.error]="esCampoInvalido('metodoPago')">
+      <label for="metodoPago">Método de Pago</label>
+      <select
+        id="metodoPago"
+        formControlName="metodoPago"
+        class="control-formulario"
+      >
+        <option value="">Seleccione método de pago</option>
+        <option value="tarjeta">Tarjeta de Crédito/Débito</option>
+        <option value="efectivo">Efectivo</option>
+        <option value="transferencia">Transferencia Bancaria</option>
+      </select>
+      <div class="mensaje-error" *ngIf="esCampoInvalido('metodoPago')">
+        {{ obtenerMensajeError('metodoPago') }}
+      </div>
+    </div>
+
+    <!-- Estado de Reserva (solo en edición) -->
+    <div class="grupo-formulario" *ngIf="esEdicion">
+      <label for="estado">Estado de Reserva</label>
+      <select
+        id="estado"
+        formControlName="estado"
+        class="control-formulario"
+      >
+        <option value="pendiente">Pendiente</option>
+        <option value="confirmada">Confirmada</option>
+        <option value="cancelada">Cancelada</option>
+        <option value="utilizada">Utilizada</option>
+      </select>
+    </div>
+
+    <div class="grupo-botones">
+      <button
+        type="submit"
+        class="btn btn-primario"
+        [disabled]="formularioReserva.invalid"
+      >
+        <i class="fas fa-ticket-alt"></i>
+        {{ esEdicion ? 'Actualizar Reserva' : 'Confirmar Reserva' }}
+      </button>
+      
+      <button
+        type="button"
+        class="btn btn-secundario"
+        (click)="onCancelar()"
+      >
+        <i class="fas fa-times"></i>
+        Cancelar
+      </button>
+    </div>
+  </form>
+</div>

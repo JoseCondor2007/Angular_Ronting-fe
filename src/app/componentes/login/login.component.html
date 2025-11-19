@@ -1,0 +1,85 @@
+<div class="login-container">
+  <div class="login-content">
+    <!-- Panel izquierdo - Formulario -->
+    <div class="form-panel">
+      <div class="form-container">
+        <div class="logo-section">
+          <div class="logo">🎬</div>
+          <h1 class="cinema-name">CinePlus</h1>
+        </div>
+
+        <h2 class="signin-title">Acceso Staff</h2>
+        <p class="subtitle">Sistema de gestión de reservas y administración de salas de cine</p>
+
+        <form (ngSubmit)="login()" class="login-form">
+          <div class="form-group">
+            <label for="nombre" class="form-label">NOMBRE DE USUARIO</label>
+            <div class="input-container">
+              <input 
+                type="text" 
+                id="nombre" 
+                [(ngModel)]="nombre" 
+                name="nombre"
+                required
+                class="form-input"
+                placeholder="Admin Cine">
+              <span class="input-icon">🎭</span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="email" class="form-label">EMAIL</label>
+            <div class="input-container">
+              <input 
+                type="email" 
+                id="email" 
+                [(ngModel)]="email" 
+                name="email"
+                required
+                class="form-input"
+                placeholder="admin@cine.com">
+              <span class="input-icon">📧</span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="password" class="form-label">CONTRASEÑA</label>
+            <div class="input-container">
+              <input 
+                type="password" 
+                id="password" 
+                [(ngModel)]="password" 
+                name="password"
+                required
+                class="form-input"
+                placeholder="Ingresa tu contraseña">
+              <span class="input-icon">🎫</span>
+            </div>
+            <div class="error-message" *ngIf="showError">
+              CREDENCIALES INCORRECTAS
+            </div>
+          </div>
+
+          <button type="submit" class="signin-btn" [class.loading]="isLoading">
+            <span class="btn-text">{{ isLoading ? 'ACCEDIENDO...' : 'ACCEDER AL SISTEMA' }}</span>
+          </button>
+        </form>
+
+        <div class="signup-link">
+          <p>¿Problemas para acceder? <a href="#" class="link">Contactar soporte</a></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Panel derecho - Imagen cinematográfica -->
+    <div class="image-panel">
+      <div class="cinema-image"></div>
+      <div class="image-overlay">
+        <div class="image-content">
+          <h3>SISTEMA DE GESTIÓN CINEMATOGRÁFICA</h3>
+          <p>Controla reservas, administra salas, gestiona empleados y optimiza la experiencia cinematográfica desde una sola plataforma.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

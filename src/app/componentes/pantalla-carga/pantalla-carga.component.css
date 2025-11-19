@@ -1,0 +1,83 @@
+.pantalla-carga {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 50%, #0F1B2D 100%);
+  color: #F5F5F5;
+}
+
+.contenido-carga {
+  text-align: center;
+  animation: fadeIn 1s ease-in;
+}
+
+.logo-cine {
+  margin-bottom: 3rem;
+}
+
+.simbolo-cine {
+  font-size: 5rem;
+  margin-bottom: 1rem;
+  animation: pulse 2s infinite;
+  filter: drop-shadow(0 0 20px rgba(185, 9, 11, 0.5));
+}
+
+.logo-cine h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+  color: #B9090B;
+  text-shadow: 0 0 20px rgba(185, 9, 11, 0.5);
+}
+
+.logo-cine p {
+  font-size: 1.2rem;
+  opacity: 0.9;
+  color: rgba(245, 245, 245, 0.8);
+}
+
+.spinner-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.spinner {
+  border: 4px solid rgba(185, 9, 11, 0.3);
+  border-radius: 50%;
+  border-top: 4px solid #B9090B;
+  width: 60px;
+  height: 60px;
+  animation: spin 1.5s linear infinite;
+}
+
+.texto-carga {
+  font-size: 1.1rem;
+  opacity: 0.9;
+  font-weight: 500;
+  color: rgba(245, 245, 245, 0.8);
+}
+
+/* Animaciones */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+  0%, 100% { 
+    transform: scale(1); 
+    filter: drop-shadow(0 0 20px rgba(185, 9, 11, 0.5));
+  }
+  50% { 
+    transform: scale(1.05); 
+    filter: drop-shadow(0 0 30px rgba(185, 9, 11, 0.8));
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
