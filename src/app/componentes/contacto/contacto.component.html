@@ -63,7 +63,7 @@
           </div>
 
           <div class="form-group">
-            <label class="form-label">Departamento *</label>
+            <label class="form-label">Distrito *</label>
             <div class="select-wrapper">
               <select 
                 class="form-control" 
@@ -71,11 +71,11 @@
                 [class.error]="esCampoInvalido('departamento')"
                 [style.borderColor]="getDepartamentoColor()"
               >
-                <option value="">Selecciona un departamento</option>
-                <option value="Atención al Cliente">Atención al Cliente</option>
-                <option value="Reservas y Ventas">Reservas y Ventas</option>
-                <option value="Eventos Especiales">Eventos Especiales</option>
-                <option value="Marketing y Prensa">Marketing y Prensa</option>
+                <option value="">Distrito</option>
+                <option value="Quilmaná">Quilmaná</option>
+                <option value="Imperial">Imperial</option>
+                <option value="San Vicente">San Vicente</option>
+                <option value="Nuevo Imperial">Nuevo Imperial</option>
               </select>
             </div>
             <div class="error-message" *ngIf="esCampoInvalido('departamento')">
@@ -167,7 +167,7 @@
             </div>
             <div class="info-content">
               <h4>Email General</h4>
-              <p>info&#64;cineplanet.com</p>
+              <p>info&#64;cineplus.com</p>
             </div>
           </div>
           <div class="info-item">
@@ -191,8 +191,8 @@
             <div class="social-item" (click)="abrirRedSocial('https://facebook.com')" title="Facebook">
               <i class="fab fa-facebook-f"></i>
             </div>
-            <div class="social-item" (click)="abrirRedSocial('https://twitter.com')" title="Twitter">
-              <i class="fab fa-twitter"></i>
+            <div class="social-item" (click)="abrirRedSocial('https://x.com')" title="X">
+              <i class="fab fa-x"></i>
             </div>
             <div class="social-item" (click)="abrirRedSocial('https://instagram.com')" title="Instagram">
               <i class="fab fa-instagram"></i>

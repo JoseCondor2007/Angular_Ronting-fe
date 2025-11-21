@@ -138,7 +138,7 @@
   font-size: 1rem;
   transition: all 0.3s ease;
   background: rgba(255, 255, 255, 0.1);
-  color: #F5F5F5;
+  color: #111111;
   font-family: inherit;
 }
 
@@ -363,7 +363,7 @@
 
 .social-item:hover {
   transform: scale(1.1) translateY(-5px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 8px 20px rgba(236, 7, 7, 0.3);
 }
 
 /* Sucursales */

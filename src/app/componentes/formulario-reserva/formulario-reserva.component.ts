@@ -22,11 +22,11 @@ export class FormularioReservaComponent implements OnInit {
 
   // Datos estáticos para el formulario
   peliculas = [
-    { id: 1, titulo: 'Duna: Parte Dos', duracion: 166 },
-    { id: 2, titulo: 'Godzilla y Kong: El Nuevo Imperio', duracion: 115 },
-    { id: 3, titulo: 'Kung Fu Panda 4', duracion: 94 },
-    { id: 4, titulo: 'Civil War', duracion: 109 },
-    { id: 5, titulo: 'Abigail', duracion: 109 }
+    { id: 1, titulo: 'Wicked: For God', duracion: 242 },
+    { id: 2, titulo: 'Depredador Tierras Salvajes', duracion: 147 },
+    { id: 3, titulo: 'Teléfono Negro 2', duracion: 154 },
+    { id: 4, titulo: 'El Correcaminos', duracion: 147 },
+    { id: 5, titulo: 'Chavin de Huantar El Rescate del Siglo', duracion: 135 }
   ];
 
   horariosDisponibles = [

@@ -8,7 +8,7 @@ export class ReservaService {
   private reservas: ReservaBoleto[] = [];
   private siguienteId = 1;
 
-  constructor() { 
+  constructor() {
     this.inicializarDatos();
   }
 
@@ -18,72 +18,86 @@ export class ReservaService {
       {
         id: 1,
         titulo: 'Wicked: For Good',
-        duracion: 145,
-        genero: 'Musical/Fantasía',
-        clasificacion: 'PG-13'
+        duracion: 162,
+        genero: 'Musical',
+        clasificacion: 'APT'
       },
       {
         id: 2,
-        titulo: 'Avatar: The Last Adventure',
-        duracion: 168,
-        genero: 'Ciencia Ficción/Aventura',
-        clasificacion: 'PG-13'
+        titulo: 'El Correcaminos',
+        duracion: 107,
+        genero: 'Acción',
+        clasificacion: 'APT'
       },
       {
         id: 3,
-        titulo: 'The Batman: Gotham Knights',
-        duracion: 132,
-        genero: 'Acción/Superhéroe',
-        clasificacion: 'PG-13'
+        titulo: 'Depredador Tierras Salvajes',
+        duracion: 106,
+        genero: 'Acción',
+        clasificacion: '+14'
       },
       {
         id: 4,
-        titulo: 'Frozen: The Northern Lights',
-        duracion: 118,
-        genero: 'Animación/Aventura',
-        clasificacion: 'PG'
+        titulo: 'Teléfono Negro 2',
+        duracion: 114,
+        genero: 'Terror',
+        clasificacion: '+14'
       },
       {
         id: 5,
-        titulo: 'Mission: Impossible - Legacy',
-        duracion: 148,
-        genero: 'Acción/Espionaje',
-        clasificacion: 'PG-13'
+        titulo: 'El Cadaver de la Novia 20 Aniversario [2005]',
+        duracion: 78,
+        genero: 'Animación',
+        clasificacion: '+14'
       },
       {
         id: 6,
-        titulo: 'Star Wars: New Republic',
-        duracion: 155,
-        genero: 'Ciencia Ficción/Aventura',
-        clasificacion: 'PG-13'
+        titulo: 'Chavin de Huantar El Rescate del Siglo',
+        duracion: 95,
+        genero: 'Acción',
+        clasificacion: '+14'
       },
       {
         id: 7,
-        titulo: 'Jurassic World: Dominion Rising',
-        duracion: 142,
-        genero: 'Aventura/Ciencia Ficción',
-        clasificacion: 'PG-13'
+        titulo: 'Hablando Huevadas de Perú para el Mundo',
+        duracion: 89,
+        genero: 'Comedia',
+        clasificacion: '+14'
       },
       {
         id: 8,
-        titulo: 'The Marvels: Secret Invasion',
-        duracion: 138,
-        genero: 'Superhéroe/Acción',
-        clasificacion: 'PG-13'
+        titulo: 'Good boy',
+        duracion: 72,
+        genero: 'Terror',
+        clasificacion: '+14'
       },
       {
         id: 9,
-        titulo: 'Fast & Furious: Final Run',
-        duracion: 140,
-        genero: 'Acción/Aventura',
-        clasificacion: 'PG-13'
+        titulo: 'Paw Patrol Especial de navidad',
+        duracion: 68,
+        genero: 'Animación',
+        clasificacion: 'APT'
       },
       {
         id: 10,
-        titulo: 'Pixar: Dreamscape',
-        duracion: 112,
-        genero: 'Animación/Fantasía',
-        clasificacion: 'PG'
+        titulo: 'Zoopocalipsis',
+        duracion: 92,
+        genero: 'Animación',
+        clasificacion: 'APT'
+      },
+      {
+        id: 11,
+        titulo: 'Crepusculo [2008]',
+        duracion: 122,
+        genero: 'Romance/Fantasía',
+        clasificacion: '+14'
+      },
+      {
+        id: 12,
+        titulo: 'Terminal Zombie',
+        duracion: 82,
+        genero: 'Terror',
+        clasificacion: '+14'
       }
     ];
 
@@ -109,7 +123,7 @@ export class ReservaService {
       },
       {
         idPelicula: 2,
-        tituloPelicula: 'Avatar: The Last Adventure',
+        tituloPelicula: 'El Correcaminos',
         fechaFuncion: new Date('2025-11-16'),
         horaFuncion: '21:30',
         sala: 5,
@@ -123,11 +137,11 @@ export class ReservaService {
         estado: 'pendiente' as const,
         fechaReserva: new Date('2025-11-11'),
         metodoPago: 'efectivo',
-        codigoQR: 'AVAT002'
+        codigoQR: 'CORR002'
       },
       {
         idPelicula: 3,
-        tituloPelicula: 'The Batman: Gotham Knights',
+        tituloPelicula: 'Depredador Tierras Salvajes',
         fechaFuncion: new Date('2025-11-14'),
         horaFuncion: '20:15',
         sala: 2,
@@ -141,11 +155,11 @@ export class ReservaService {
         estado: 'utilizada' as const,
         fechaReserva: new Date('2025-11-08'),
         metodoPago: 'tarjeta',
-        codigoQR: 'BATM003'
+        codigoQR: 'DEPR003'
       },
       {
         idPelicula: 4,
-        tituloPelicula: 'Frozen: The Northern Lights',
+        tituloPelicula: 'Teléfono Negro 2',
         fechaFuncion: new Date('2025-11-17'),
         horaFuncion: '16:00',
         sala: 1,
@@ -159,11 +173,11 @@ export class ReservaService {
         estado: 'confirmada' as const,
         fechaReserva: new Date('2025-11-12'),
         metodoPago: 'transferencia',
-        codigoQR: 'FROZ004'
+        codigoQR: 'TELE004'
       },
       {
         idPelicula: 5,
-        tituloPelicula: 'Mission: Impossible - Legacy',
+        tituloPelicula: 'El Cadaver de la Novia 20 Aniversario [2005]',
         fechaFuncion: new Date('2025-11-13'),
         horaFuncion: '22:00',
         sala: 4,
@@ -177,11 +191,11 @@ export class ReservaService {
         estado: 'pendiente' as const,
         fechaReserva: new Date('2025-11-09'),
         metodoPago: 'tarjeta',
-        codigoQR: 'MISS005'
+        codigoQR: 'CADA005'
       },
       {
         idPelicula: 6,
-        tituloPelicula: 'Star Wars: New Republic',
+        tituloPelicula: 'Chavin de Huantar El Rescate del Siglo',
         fechaFuncion: new Date('2025-11-18'),
         horaFuncion: '19:45',
         sala: 6,
@@ -195,11 +209,11 @@ export class ReservaService {
         estado: 'confirmada' as const,
         fechaReserva: new Date('2025-11-13'),
         metodoPago: 'efectivo',
-        codigoQR: 'STAR006'
+        codigoQR: 'CHAV006'
       },
       {
         idPelicula: 7,
-        tituloPelicula: 'Jurassic World: Dominion Rising',
+        tituloPelicula: 'Hablando Huevadas de Perú para el Mundo',
         fechaFuncion: new Date('2025-11-19'),
         horaFuncion: '18:30',
         sala: 3,
@@ -213,11 +227,11 @@ export class ReservaService {
         estado: 'pendiente' as const,
         fechaReserva: new Date('2025-11-14'),
         metodoPago: 'tarjeta',
-        codigoQR: 'JURA007'
+        codigoQR: 'HABL007'
       },
       {
         idPelicula: 8,
-        tituloPelicula: 'The Marvels: Secret Invasion',
+        tituloPelicula: 'Good boy',
         fechaFuncion: new Date('2025-11-20'),
         horaFuncion: '20:00',
         sala: 5,
@@ -231,11 +245,11 @@ export class ReservaService {
         estado: 'confirmada' as const,
         fechaReserva: new Date('2025-11-15'),
         metodoPago: 'transferencia',
-        codigoQR: 'MARV008'
+        codigoQR: 'GOOD008'
       },
       {
         idPelicula: 9,
-        tituloPelicula: 'Fast & Furious: Final Run',
+        tituloPelicula: 'Paw Patrol Especial de navidad',
         fechaFuncion: new Date('2025-11-21'),
         horaFuncion: '21:15',
         sala: 2,
@@ -249,11 +263,11 @@ export class ReservaService {
         estado: 'utilizada' as const,
         fechaReserva: new Date('2025-11-10'),
         metodoPago: 'tarjeta',
-        codigoQR: 'FAST009'
+        codigoQR: 'PAW009'
       },
       {
         idPelicula: 10,
-        tituloPelicula: 'Pixar: Dreamscape',
+        tituloPelicula: 'Zoopocalipsis',
         fechaFuncion: new Date('2025-11-22'),
         horaFuncion: '15:30',
         sala: 1,
@@ -267,7 +281,43 @@ export class ReservaService {
         estado: 'confirmada' as const,
         fechaReserva: new Date('2025-11-16'),
         metodoPago: 'efectivo',
-        codigoQR: 'PIXA010'
+        codigoQR: 'ZOOP010'
+      },
+      {
+        idPelicula: 11,
+        tituloPelicula: 'Crepusculo [2008]',
+        fechaFuncion: new Date('2025-11-23'),
+        horaFuncion: '19:00',
+        sala: 4,
+        asientos: ['E5', 'E6'],
+        cantidadBoletos: 2,
+        tipoBoleto: 'adulto',
+        precioTotal: 24.00,
+        nombreCliente: 'Lucía Fernanda Castro',
+        telefonoCliente: '912345679',
+        correoCliente: 'lucia.castro@email.com',
+        estado: 'confirmada' as const,
+        fechaReserva: new Date('2025-11-17'),
+        metodoPago: 'tarjeta',
+        codigoQR: 'CREP011'
+      },
+      {
+        idPelicula: 12,
+        tituloPelicula: 'Terminal Zombie',
+        fechaFuncion: new Date('2025-11-24'),
+        horaFuncion: '22:30',
+        sala: 3,
+        asientos: ['F1', 'F2'],
+        cantidadBoletos: 2,
+        tipoBoleto: 'adulto',
+        precioTotal: 24.00,
+        nombreCliente: 'Ricardo Antonio Morales',
+        telefonoCliente: '923456780',
+        correoCliente: 'ricardo.morales@email.com',
+        estado: 'pendiente' as const,
+        fechaReserva: new Date('2025-11-18'),
+        metodoPago: 'efectivo',
+        codigoQR: 'TERM012'
       }
     ];
 
@@ -301,7 +351,7 @@ export class ReservaService {
     this.reservas.push({
       id: this.siguienteId++,
       idPelicula: 2,
-      tituloPelicula: 'Avatar: The Last Adventure',
+      tituloPelicula: 'El Correcaminos',
       fechaFuncion: new Date('2025-11-13'),
       horaFuncion: '19:30',
       sala: 5,
@@ -346,7 +396,7 @@ export class ReservaService {
   actualizarReserva(id: number, reservaActualizada: Partial<ReservaBoleto>): boolean {
     const index = this.reservas.findIndex(r => r.id === id);
     if (index !== -1) {
-      this.reservas[index] = { 
+      this.reservas[index] = {
         ...this.reservas[index],
         ...reservaActualizada
       };
